@@ -1,0 +1,19 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+
+<h2><a href="/">Homepage</a></h2>
+
+<h1>{{company.company_name}}</h1>
+
+{% if company.work_place_set.all %}
+	<ol>
+		{% for place in company.work_place_set.all %}
+		<li>
+			<p>{{ place.job }} : {{place.worker}}</p>
+		</li>
+		{% endfor %}
+	</ol>
+{% else %}
+	<p>No details</p>
+{% endif %}
