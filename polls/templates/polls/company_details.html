@@ -1,0 +1,36 @@
+{% extends 'polls/base.html' %}
+
+{% block content %}
+
+<h1>{{company.company_name}}</h1>
+
+<h2>Managers</h2>
+{% if company.manager_set.all %}
+	<ol>
+		{% for manager in company.manager_set.all %}
+		<li><h4>{{ manager.name }}</h4></li>
+		{% endfor %}
+	</ol>
+{% else %}
+<p>No details</p>
+{% endif %}
+
+<h2>Workplaces:</h2>
+{% if company.job_set.all %}
+	<ol>
+		{% for job in company.job_set.all %}
+		<li>
+			<h4>{{ job.name }}</h4>
+			<!-- <ul>
+			{% for place in job.workplace_set.all %}
+				<li>{{ place.worker }} : {{place.status}}</li> 
+			{% endfor %}
+			</ul> -->
+		</li>
+		{% endfor %}
+	</ol>
+{% else %}
+	<p>No details</p>
+{% endif %}
+
+{% endblock %}

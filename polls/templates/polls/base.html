@@ -1,0 +1,17 @@
+{% load static %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Project</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+</head>
+<body>
+    <div>
+        <a href="{% url 'index' %}">Homepage</a>
+        <a href="{% url 'workers' %}">Workers</a>
+        <a href="{% url 'create_job' %}">Create job</a>
+    </div>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

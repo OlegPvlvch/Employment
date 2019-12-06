@@ -1,0 +1,19 @@
+{% extends 'polls/base.html' %}
+
+{% block content %}
+
+<h1>Companies</h1>
+
+{% if object_list %}
+<ul>
+	{% for company in object_list %}
+	<li>
+		<p><a href="{% url 'get_details' company.id %}">{{company.company_name}}</a></p> 
+	</li>
+	{% endfor %}
+</ul>
+{% else %}
+<p>No companies</p>
+{% endif %}
+
+{% endblock %}

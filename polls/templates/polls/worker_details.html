@@ -1,0 +1,32 @@
+{% extends 'polls/base.html' %}
+
+{% block content %}
+
+<h1>{{ worker.name }}</h1>
+
+{% if worker.workplace_set.all %}
+<ul>
+    {% for place in worker.workplace_set.all %}
+        <li>
+            <table>
+                <tr>
+                    <td>Company</td>
+                    <td>{{ place.job.company }}</td>
+                </tr>
+                <tr>
+                    <td>Job</td>
+                    <td>{{ place.job }}</td>
+                </tr>
+                <tr>
+                    <td>Status</td>
+                    <td>{{ place.status }}</td>
+                </tr>
+            </table>
+        </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No details</p>
+{% endif %}
+
+{% endblock %}

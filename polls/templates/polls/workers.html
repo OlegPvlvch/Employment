@@ -1,0 +1,17 @@
+{% extends 'polls/base.html' %}
+
+{% block content %}
+
+<h1>Workers</h1>
+
+{% if workers_list %}
+<ul>
+    {% for worker in workers_list %}
+        <li><a href="{% url 'worker_details' worker.id %}">{{ worker.name }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No workers</p>
+{% endif %}
+
+{% endblock %}
