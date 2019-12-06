@@ -44,7 +44,7 @@ class WorkTime(models.Model):
               (2, 'Cancelled'))
     date_start = models.DateTimeField(auto_now_add=True)
     date_end = models.DateTimeField()
-    status = models.SmallIntegerField(choices=STATUS, default='New')
+    status = models.SmallIntegerField(choices=STATUS, default=0)
     worker = models.ForeignKey(Worker, on_delete=models.CASCADE)
     workplace = models.ForeignKey(WorkPlace, on_delete=models.CASCADE)
 
