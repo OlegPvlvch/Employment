@@ -27,24 +27,24 @@ class Worker(models.Model):
         return self.name
 
 class WorkPlace(models.Model):
-    STATUS = ((0, 'New'), 
-              (1, 'Approved'), 
-              (2, 'Cancelled'), 
-              (3, 'Finished'))
+    STATUS = (('New', 'New'), 
+              ('Approved', 'Approved'), 
+              ('Cancelled', 'Cancelled'), 
+              ('Finished', 'Finished'))
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
     worker = models.ForeignKey(Worker, on_delete=models.CASCADE)
-    status = models.SmallIntegerField(choices=STATUS, default=0)
+    status = models.CharField(max_length=15, choices=STATUS, default='New')
 
     def __str__(self):
         return str(self.job)+' in '+str(self.job.company)
 
 class WorkTime(models.Model):
-    STATUS = ((0, 'New'), 
-              (1, 'Approved'), 
-              (2, 'Cancelled'))
+    STATUS = (('New', 'New'), 
+              ('Approved', 'Approved'), 
+              ('Cancelled', 'Cancelled'))
     date_start = models.DateTimeField(auto_now_add=True)
     date_end = models.DateTimeField()
-    status = models.SmallIntegerField(choices=STATUS, default='New')
+    status = models.CharField(max_length=15, choices=STATUS, default='New')
     worker = models.ForeignKey(Worker, on_delete=models.CASCADE)
     workplace = models.ForeignKey(WorkPlace, on_delete=models.CASCADE)
 

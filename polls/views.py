@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import generic
 
 from .models import Company, Worker, Job
-from .forms import CreateJobForm
+from .forms import CreateJobForm, HireWorkerForm
 
 class CompaniesView(generic.ListView):
     template_name='polls/companies.html'
@@ -24,6 +24,13 @@ class WorkerDetailsView(generic.DetailView):
 class CreateJobView(generic.CreateView):
     template_name = 'polls/create_job.html'
     form_class = CreateJobForm
-    model = Job
     success_url = '/' 
 
+class HireWorkerView(generic.edit.FormView):
+    template_name = 'polls/hire_worker.html'
+    form_class = HireWorkerForm
+    success_url = '/'
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
