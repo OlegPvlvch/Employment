@@ -1,5 +1,6 @@
 from django import forms
-from .models import Job, Worker, WorkPlace
+from .models import Job, Worker, WorkPlace, WorkTime
+import datetime
 
 class CreateJobForm(forms.ModelForm):
     class Meta:
@@ -7,7 +8,7 @@ class CreateJobForm(forms.ModelForm):
         fields=['name', 'company']
         labels={
             'company' : 'Company',
-            'name':'Description'
+            'name' : 'Description'
         }
 
 class HireWorkerForm(forms.Form):
@@ -17,7 +18,28 @@ class HireWorkerForm(forms.Form):
                 queryset=Worker.objects.all())
     
     def save(self):
+        if self.cleaned_data['worker'].workplace_set.all():
+            last_place = self.cleaned_data['worker'].workplace_set.order_by('-id')[0]
+            last_place.status = 'Cancelled'
+            last_place.save()
         WorkPlace.objects.create(
             job = self.cleaned_data['job'],
             worker = self.cleaned_data['worker']
         )
+
+class AddWorkTimeForm(forms.Form):
+    worker = forms.ModelChoiceField(
+                queryset=Worker.objects.all())
+    work_place = forms.ModelChoiceField(
+                queryset=WorkPlace.objects.all())
+    date_start = forms.DateTimeField()
+    date_end = forms.DateTimeField(initial=datetime.date.today)
+
+    def add(self):
+        WorkTime.objects.create(
+            date_start = self.cleaned_data.get('date_start'),
+            date_end = self.cleaned_data.get('date_end'),
+            worker = self.cleaned_data.get('worker'),
+            workplace = self.cleaned_data.get('work_place')
+        )
+        

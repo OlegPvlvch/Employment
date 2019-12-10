@@ -1,10 +1,9 @@
 {% extends 'polls/base.html' %}
 
 {% block content %}
+<h1>Add worktime</h1>
 
-<h1>Hiring worker</h1>
-
-<form method='post'>
+<form method="post">
     {% csrf_token %}
     {% for field in form %}
         {{ field.label }} : {{ field }}

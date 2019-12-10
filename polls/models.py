@@ -32,7 +32,7 @@ class WorkPlace(models.Model):
               ('Cancelled', 'Cancelled'), 
               ('Finished', 'Finished'))
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
-    worker = models.ForeignKey(Worker, on_delete=models.CASCADE)
+    worker = models.ForeignKey(Worker, on_delete=models.CASCADE, blank=True)
     status = models.CharField(max_length=15, choices=STATUS, default='New')
 
     def __str__(self):
@@ -42,11 +42,11 @@ class WorkTime(models.Model):
     STATUS = (('New', 'New'), 
               ('Approved', 'Approved'), 
               ('Cancelled', 'Cancelled'))
-    date_start = models.DateTimeField(auto_now_add=True)
-    date_end = models.DateTimeField()
+    date_start = models.DateTimeField()
+    date_end = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=15, choices=STATUS, default='New')
     worker = models.ForeignKey(Worker, on_delete=models.CASCADE)
-    workplace = models.ForeignKey(WorkPlace, on_delete=models.CASCADE)
+    workplace = models.OneToOneField(WorkPlace, on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.date_start)+' - '+str(self.date_end)
+        return str(self.date_end-self.date_start)
