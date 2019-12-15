@@ -31,7 +31,7 @@ class AddWorkTimeForm(forms.Form):
     worker = forms.ModelChoiceField(
                 queryset=Worker.objects.all())
     work_place = forms.ModelChoiceField(
-                queryset=WorkPlace.objects.all())
+                queryset=WorkPlace.objects.filter(worktime__isnull=True))
     date_start = forms.DateTimeField()
     date_end = forms.DateTimeField(initial=datetime.date.today)
 

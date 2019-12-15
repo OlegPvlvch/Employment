@@ -5,7 +5,7 @@
 <h1>{{ worker.name }}</h1>
 
 {% if worker.workplace_set.all %}
-<ul>
+<ol>
     {% for place in worker.workplace_set.all %}
         <li>
             <table>
@@ -28,7 +28,7 @@
             </table>
         </li>
     {% endfor %}
-</ul>
+</ol>
 {% else %}
 <p>No details</p>
 {% endif %}
