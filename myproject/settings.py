@@ -119,3 +119,37 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+import logging
+from django.utils.log import DEFAULT_LOGGING
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+from sentry_sdk.integrations.logging import LoggingIntegration
+
+LOGGING = {
+    'version' : 1,
+    'disable_existing_loggers' : False,
+    'handlers' : {
+        'sentry_handler' : {
+            'level' : 'DEBUG',
+            'class' : 'sentry_sdk.integrations.logging.BreadcrumbHandler'
+        }
+    },
+    'loggers' : {
+        'sentry_logger' : {
+            'handlers' : ['sentry_handler'],
+            'level' : 'DEBUG',
+            'propagate': False,
+        },
+    }
+}
+
+sentry_logging = LoggingIntegration(
+   level=logging.DEBUG,        # Capture info and above as breadcrumbs
+   event_level=logging.INFO    # Send INFO as events
+)
+
+sentry_sdk.init(
+    dsn="https://419d54f5a54f40ed80fdde2a097336b1@sentry.io/1857384",
+    integrations=[sentry_logging]
+)
