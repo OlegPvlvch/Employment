@@ -1,0 +1,20 @@
+h1{
+	background-color: lightblue;
+}
+body{
+	background-color: teal;
+}
+span{
+	background-color: white;
+}
+.auth_link{
+	float: right;
+	background-color: rgb(32, 197, 104);
+	padding: 3px;
+}
+.username_span{
+	float: right;
+	background-color: white;
+	margin-right: 10px;
+	padding: 3px;
+}

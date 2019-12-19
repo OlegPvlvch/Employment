@@ -52,10 +52,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'myproject.urls'
 
+TEMPLATE_DIR = os.path.join(BASE_DIR, "login_app/templates")
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATE_DIR, ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -153,3 +155,6 @@ sentry_sdk.init(
     dsn="https://419d54f5a54f40ed80fdde2a097336b1@sentry.io/1857384",
     integrations=[sentry_logging]
 )
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

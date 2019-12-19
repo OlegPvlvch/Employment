@@ -21,11 +21,6 @@
 		{% for job in company.job_set.all %}
 		<li>
 			<h4>{{ job.name }}</h4>
-			<!-- <ul>
-			{% for place in job.workplace_set.all %}
-				<li>{{ place.worker }} : {{place.status}}</li> 
-			{% endfor %}
-			</ul> -->
 		</li>
 		{% endfor %}
 	</ol>

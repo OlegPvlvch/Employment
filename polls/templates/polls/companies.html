@@ -4,6 +4,9 @@
 
 <h1>Companies</h1>
 
+{% if not user.is_authenticated %}
+<h2>Only for authenticated users</h2>
+{% else %}
 {% if object_list %}
 <ul>
 	{% for company in object_list %}
@@ -16,4 +19,5 @@
 <p>No companies</p>
 {% endif %}
 
+{% endif %}
 {% endblock %}
