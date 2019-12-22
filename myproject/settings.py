@@ -25,7 +25,7 @@ SECRET_KEY = '!&senh6z6s$edae@j(nqpj=$+h6tb8$!4#nh-vy81vd#1hsy(3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.2"]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -45,6 +45,7 @@ MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -108,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
 
@@ -164,4 +165,11 @@ LOGOUT_REDIRECT_URL = '/'
 INTERNAL_IPS = [
     '127.0.0.1',
     '127.0.0.2',
+]
+
+from django.utils.translation import gettext_lazy as _
+
+LANGUAGES = [
+  ('ru', _('Russian')),
+  ('en', _('English')),
 ]

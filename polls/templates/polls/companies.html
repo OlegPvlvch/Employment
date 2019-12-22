@@ -6,7 +6,7 @@
 <h1>{% trans "Companies" %}</h1>
 
 {% if not user.is_authenticated %}
-<h2>Only for authenticated users</h2>
+<h2>{% trans "Only for authenticated users" %}</h2>
 {% else %}
 {% if object_list %}
 <ul>
