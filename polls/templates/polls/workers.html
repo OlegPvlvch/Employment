@@ -1,8 +1,9 @@
 {% extends 'polls/base.html' %}
+{% load i18n %}
 
 {% block content %}
 
-<h1>Workers</h1>
+<h1>{% trans "Workers" %}</h1>
 
 {% if workers_list %}
 <ul>
@@ -11,7 +12,7 @@
     {% endfor %}
 </ul>
 {% else %}
-<p>No workers</p>
+<p>{% trans "No workers" %}</p>
 {% endif %}
 
 {% endblock %}

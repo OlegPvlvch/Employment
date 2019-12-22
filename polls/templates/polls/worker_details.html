@@ -1,4 +1,5 @@
 {% extends 'polls/base.html' %}
+{% load i18n %}
 
 {% block content %}
 
@@ -10,19 +11,19 @@
         <li>
             <table>
                 <tr>
-                    <td>Company</td>
+                    <td>{% trans "Company" %}</td>
                     <td>{{ place.job.company }}</td>
                 </tr>
                 <tr>
-                    <td>Job</td>
+                    <td>{% trans "Job" %}</td>
                     <td>{{ place.job }}</td>
                 </tr>
                 <tr>
-                    <td>Status</td>
+                    <td>{% trans "Status" %}</td>
                     <td>{{ place.status }}</td>
                 </tr>
                 <tr>
-                    <td>Worktime</td>
+                    <td>{% trans "Worktime" %}</td>
                     <th>{{ place.worktime }}</th>
                 </tr>
             </table>
