@@ -21,20 +21,14 @@
 {% endif %}
 
 <script>
-	"use strict";
+	let websocket = new WebSocket("ws://" + window.location.host);
 
-	let wsocket = new WebSocket("ws://" + window.location.host);
-
-	wsocket.onmessage = event => {
+	websocket.onmessage = event => {
 		let data = JSON.parse(event.data);
 
 		if(data['reload_page']){
-			document.location.reload();
+			window.location.reload();
 		}
-	};
-
-	wsocket.onmessage = event => {
-		alert("Closed!");
 	};
 </script>
 
