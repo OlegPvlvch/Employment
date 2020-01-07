@@ -3,8 +3,6 @@ from django.views import generic
 from .models import Company, Worker, Job
 from .forms import CreateJobForm, HireWorkerForm, AddWorkTimeForm
 
-#from django.utils.translation import gettext as _
-
 
 class CompaniesView(generic.ListView):
     template_name='polls/companies.html'

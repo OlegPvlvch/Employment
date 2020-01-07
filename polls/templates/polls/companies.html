@@ -20,5 +20,23 @@
 <p>{% trans "No companies" %}</p>
 {% endif %}
 
+<script>
+	let socket = new WebSocket(
+		"ws://" + window.location.host
+	);
+
+	socket.onopen = function(event){
+		alert("All is okay");
+	};
+
+	socket.onmessage = event => {
+		let data = JSON.parse(event.data);
+
+		if(data['reload_page']){
+			document.location.reload();
+		}
+	};
+</script>
+
 {% endif %}
 {% endblock %}
