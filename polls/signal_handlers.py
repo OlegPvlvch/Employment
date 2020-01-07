@@ -5,11 +5,10 @@ from asgiref.sync import async_to_sync
 from .models import Company
 
 @receiver(post_save, sender=Company)
-def refresh_page(**kwargs):
+def refresh_page(sender, **kwargs):
     channel_layer = get_channel_layer()
 
     async_to_sync(channel_layer.group_send)(
         "companies_page", {
-            "type": "page.reload",
-            'reload_page' : True
+            "type": "page.reload"
         })
