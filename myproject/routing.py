@@ -1,13 +1,13 @@
 
-from channels.auth import AuthMiddlewareStack
-from channels.routing import ProtocolTypeRouter, URLRouter
-from django.urls import re_path, path
-from polls.consumers import CompaniesListConsumer
+# from channels.auth import AuthMiddlewareStack
+# from channels.routing import ProtocolTypeRouter, URLRouter
+# from django.urls import re_path, path
+# from polls.consumers import CompaniesListConsumer
 
-application = ProtocolTypeRouter({
-    'websocket': AuthMiddlewareStack(
-        URLRouter([
-            re_path(r'', CompaniesListConsumer)
-        ])
-    ),
-})
+# application = ProtocolTypeRouter({
+#     'websocket': AuthMiddlewareStack(
+#         URLRouter([
+#             re_path(r'', CompaniesListConsumer)
+#         ])
+#     ),
+# })

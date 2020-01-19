@@ -1,0 +1,10 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Your worker exceed the limit of hours
+From: somemail@gmail.com
+To: example@gmail.com
+Date: Sun, 19 Jan 2020 13:23:59 -0000
+
+Worker: Worker. Total hours 4
+-------------------------------------------------------------------------------

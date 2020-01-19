@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'polls.apps.PollsConfig',
     'debug_toolbar',
-    'channels',
-    'channels_redis'
+    #'channels',
+    #'channels_redis'
 ]
 
 MIDDLEWARE = [
@@ -176,13 +176,36 @@ LANGUAGES = [
   ('en', _('English')),
 ]
 
-ASGI_APPLICATION = 'myproject.routing.application'
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = '/home/oleg/projects/Myproject/Employment/emails.txt'
 
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [("localhost", 6379)],
-        },
-    },
+from celery.schedules import crontab
+
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/1'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Europe/Kiev'
+CELERY_ROUTES = {
+   "polls.tasks.get_workers" : {"queue": "get_workers"},
+   "polls.tasks.send_message_if_overtime": {"queue": "send_message"}
 }
+CELERY_BEAT_SCHEDULE = {
+   'check_week_hours_limit': {
+       'task': 'polls.tasks.check_hours_limit',
+       'schedule': crontab('0', '0', day_of_week='0')
+   },
+}
+
+
+# ASGI_APPLICATION = 'myproject.routing.application'
+
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [("localhost", 6379)],
+#         },
+#     },
+# }

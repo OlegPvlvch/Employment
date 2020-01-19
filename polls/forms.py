@@ -1,5 +1,5 @@
 from django import forms
-from .models import Job, Worker, WorkPlace, WorkTime
+from .models import Job, Worker, WorkPlace, WorkTime, Manager
 import datetime
 
 class CreateJobForm(forms.ModelForm):
@@ -16,6 +16,9 @@ class HireWorkerForm(forms.Form):
                 queryset=Job.objects.all())
     worker = forms.ModelChoiceField(
                 queryset=Worker.objects.all())
+    manager = forms.ModelChoiceField(
+                queryset=Manager.objects.all())
+    week_hours_limit = forms.IntegerField()
     
     def save(self):
         if self.cleaned_data['worker'].workplace_set.all():
@@ -24,7 +27,10 @@ class HireWorkerForm(forms.Form):
             last_place.save()
         WorkPlace.objects.create(
             job = self.cleaned_data['job'],
-            worker = self.cleaned_data['worker']
+            worker = self.cleaned_data['worker'],
+            week_hours_limit = self.cleaned_data['week_hours_limit'],
+            status = 'Approved',
+            manager = self.cleaned_data['manager']
         )
 
 class AddWorkTimeForm(forms.Form):
